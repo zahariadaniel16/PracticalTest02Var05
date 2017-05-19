@@ -13,8 +13,11 @@ public class PracticalTest02Var05MainActivity extends AppCompatActivity {
 
     private Button connectButton, putButton, getButton;
     private EditText port, putEditText, getEditText;
+    private EditText getWork, putWork;
     private ServerThread serverThread;
     private ClientThread clientThread;
+
+    private TextView workResult;
 
     private ConnectButtonClickListener connectButtonClickListener = new ConnectButtonClickListener();
 
@@ -55,15 +58,38 @@ public class PracticalTest02Var05MainActivity extends AppCompatActivity {
                 return;
             }
 
+            String getEditText = getWork.getText().toString();
+            String putEditText = putWork.getText().toString();
+
+            if ((getEditText == null || getEditText.isEmpty())
+                    && (putEditText == null || putEditText.isEmpty())) {
+                Toast.makeText(getApplicationContext(), "[MAIN ACTIVITY] Parameters from client should be filled", Toast.LENGTH_SHORT).show();
+                return;
+            }
 
 
+            String key = null;
+            String value = null;
+            if (getEditText != null && !getEditText.isEmpty()) {
+                key = getEditText;
+                value = "";
+            } else {
 
 
+                String values[] = putEditText.split(",");
+                Log.e(Constants.TAG, values.toString());
+                key = values[0];
+                value = values[1];
+            }
 
+            workResult.setText(Constants.EMPTY_STRING);
 
             clientThread = new ClientThread(
-                    clientAddress, Integer.parseInt(clientPort));
+                    clientAddress, Integer.parseInt(clientPort), key, value, workResult
+            );
             clientThread.start();
+
+
         }
 
     }
@@ -88,12 +114,6 @@ public class PracticalTest02Var05MainActivity extends AppCompatActivity {
 
 
 
-
-
-
-            clientThread = new ClientThread(
-                    clientAddress, Integer.parseInt(clientPort));
-            clientThread.start();
         }
 
     }
@@ -116,7 +136,7 @@ public class PracticalTest02Var05MainActivity extends AppCompatActivity {
         putEditText = (EditText) findViewById(R.id.put_edit_text);
         getEditText = (EditText) findViewById(R.id.get_edit_text);
 
-
+        
     }
 
     @Override

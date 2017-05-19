@@ -19,15 +19,13 @@ public class ClientThread extends Thread {
     private int port;
     private String key;
     private String value;
-    private String workType;
     private TextView sendWorkButton;
 
     private Socket socket;
 
-    public ClientThread(String address, int port, String workType, String key, String value, TextView sendWorkButton) {
+    public ClientThread(String address, int port, String key, String value, TextView sendWorkButton) {
         this.address = address;
         this.port = port;
-        this.workType = workType;
         this.key = key;
         this.value = value;
         this.sendWorkButton = sendWorkButton;
@@ -48,9 +46,6 @@ public class ClientThread extends Thread {
                 return;
             }
 
-
-            printWriter.println(workType);
-            printWriter.flush();
             printWriter.println(key);
             printWriter.flush();
             printWriter.println(value);
