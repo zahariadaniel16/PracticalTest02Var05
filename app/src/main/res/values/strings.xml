@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">PracticalTest02Var05</string>
+    <string name="server">SERVER</string>
+    <string name="server_port">Port</string>
+    <string name="client">CLIENT</string>
+    <string name="connect">CONNECT</string>
+    <string name="put">PUT</string>
+    <string name="get">GET</string>
+    <string name="put_edit_text">Key, value</string>
+    <string name="get_edit_text">Key</string>
+
+</resources>
